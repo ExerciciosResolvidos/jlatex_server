@@ -10,21 +10,25 @@
     <build>
         <plugins>
             <plugin>
-              <artifactId>maven-assembly-plugin</artifactId>
-              <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
-                <archive>
-                <manifest>
-                  <mainClass>Main</mainClass>
-                </manifest>
-                </archive>
-                <descriptorRefs>
-                  <descriptorRef>jar-with-dependencies</descriptorRef>
-                </descriptorRefs>
-              </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.3</version>
+                <executions>
+                  <execution>
+                    <phase>package</phase>
+                    <goals>
+                      <goal>shade</goal>
+                    </goals>
+                    <configuration>
+                      <transformers>
+                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                          <mainClass>target.classes.App</mainClass>
+                        </transformer>
+                      </transformers>
+                    </configuration>
+                  </execution>
+                </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
